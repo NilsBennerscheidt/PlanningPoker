@@ -28,7 +28,7 @@ public class Schnittstelle {
 
             writer.write(sb.toString());
             writer.close();
-            System.out.println("done!");
+            System.out.println("Fertig!");
 
         } catch (FileNotFoundException e) {
             System.out.println(e.getMessage());
