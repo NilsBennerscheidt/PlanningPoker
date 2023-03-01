@@ -39,7 +39,7 @@ public class Schnittstelle {
 
     public void readCSVFile(){
         List<List<String>> records = new ArrayList<>();
-        try (Scanner scanner = new Scanner(new File("test.csv"));) {
+        try (Scanner scanner = new Scanner(new File("Userstories.csv"));) {
             while (scanner.hasNextLine()) {
                 records.add(getRecordFromLine(scanner.nextLine()));
             }
