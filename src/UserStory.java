@@ -2,12 +2,12 @@ import java.util.ArrayList;
 
 public class UserStory {
     private String sStory;
-    private ArrayList<String> sQuestions;
+    private ArrayList<cFragen> sFragen;
     private ArrayList<UserBewertung> lsUserBewertung;
 
     public UserStory(String sStory) {
         this.sStory = sStory;
-        this.sQuestions = new ArrayList<String>();
+        this.sFragen = new ArrayList<cFragen>();
         this.lsUserBewertung = new ArrayList<UserBewertung>();
     }
 
@@ -15,19 +15,23 @@ public class UserStory {
         return sStory;
     }
 
-    public ArrayList<String> getsQuestions() {
-        return sQuestions;
+    public void setsStory(String sStory) {
+        this.sStory = sStory;
     }
 
-    public void fAddQuestion(String sQuestions) {
-        this.sQuestions.add(sQuestions);
+    public ArrayList<cFragen> getsFragen() {
+        return sFragen;
+    }
+
+    public void setsFragen(ArrayList<cFragen> sFragen) {
+        this.sFragen = sFragen;
     }
 
     public ArrayList<UserBewertung> getLsUserBewertung() {
         return lsUserBewertung;
     }
 
-    public void fAddUserBewertung(UserBewertung p_oUserBewertung) {
-        this.lsUserBewertung.add(p_oUserBewertung);
+    public void setLsUserBewertung(ArrayList<UserBewertung> lsUserBewertung) {
+        this.lsUserBewertung = lsUserBewertung;
     }
 }
