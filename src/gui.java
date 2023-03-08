@@ -11,9 +11,11 @@ public class gui {
     private JTextArea textArea1;
     private JButton button1;
     private JComboBox comboBox1;
+    private JLabel UserstoryCounter;
     private JFrame frame;
     private ArrayList<UserStory>  lsUserStories;
     private int nUserStoryIndex = 0;
+
 
     public static void main(String[] args){
         EventQueue.invokeLater(new Runnable() {
@@ -29,6 +31,8 @@ public class gui {
         });
     }
 
+
+
     public gui(){
         frame = new JFrame();
         frame.setBounds(100, 100, 450, 300);
@@ -38,11 +42,24 @@ public class gui {
         frame.setContentPane(panel1);
 
         System.out.println("Hello");
+
         button1.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 System.out.println("Test");
-                _fSetNextStory();
+                String sItem = (String) comboBox1.getSelectedItem();
+                System.out.println(comboBox1.getSelectedItem());
+
+                if(sItem.equals("-")){
+                    //Keine Auswahl getroffen. Der User muss was auswählen
+                    JOptionPane.showMessageDialog(null, "Keine gültige Bewertung auswählt", "InfoBox: ", JOptionPane.INFORMATION_MESSAGE);
+
+                }else{
+                    comboBox1.setSelectedIndex(0);
+                    //TODO: Update Label
+                    //TODO: Speichern
+                    _fSetNextStory();
+                }
             }
         });
 
@@ -52,7 +69,16 @@ public class gui {
     private void _init(){
         // Laden der Userstories
         lsUserStories = this._getUserStories();
+
         //generate GUI
+        String[] sWertungswerte = new String[]{"-", "0", "1", "2", "3", "5", "8", "13", "20", "40","100", "∞", "?"};
+        for(int i = 0; i < sWertungswerte.length; i++){
+            comboBox1.addItem(sWertungswerte[i]);
+            comboBox1.setSelectedIndex(0);
+            System.out.println(String.valueOf(i)+ "   "+ sWertungswerte[i]);
+        }
+
+        UserstoryCounter.setText("1/" + this.lsUserStories.size());
 
         //Startet das Program
         this._run();
@@ -75,15 +101,21 @@ public class gui {
     }
 
     private void _fSetNextStory(){
-        System.out.println("_fSetNextStory() setzen einer UserStory");
 
+        // Get bewertung
+
+        // Set Bewertung
 
         if(this.nUserStoryIndex == this.lsUserStories.size()){
             //Next Tab
-            System.out.println("Nächster Tab");
+            System.out.println("Wechsel zum nächster Tab");
+            JOptionPane.showMessageDialog(null, "Bewertung beendet", "Info", JOptionPane.INFORMATION_MESSAGE);
+            tabbedPane1.setSelectedIndex(1);
         }else{
             String Text = lsUserStories.get(this.nUserStoryIndex).getsStory();
             textArea1.setText(Text);
+            String sCounter = this.nUserStoryIndex + 1 + "/" + this.lsUserStories.size();
+            UserstoryCounter.setText(sCounter);
             this.nUserStoryIndex = this.nUserStoryIndex + 1;
         }
     }
